@@ -1,0 +1,68 @@
+{
+  "name": "akashi-verify",
+  "version": "1.0.0",
+  "description": "Independently verify Akashi screen recordings against their on-chain proof (EAS). Browser + Node + CLI.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "akashi-verify": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "default": "./dist/node.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "keywords": [
+    "akashi",
+    "verify",
+    "eas",
+    "attestation",
+    "provenance",
+    "screen recording",
+    "deepfake",
+    "base",
+    "ethereum"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akashi-video/akashi-verify.git"
+  },
+  "homepage": "https://akashi.video/docs/verifier",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node -e \"const f='dist/cli.js';const fs=require('fs');const s=fs.readFileSync(f,'utf8');if(!s.startsWith('#!'))fs.writeFileSync(f,'#!/usr/bin/env node\\n'+s)\"",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@noble/hashes": "^1.5.0",
+    "viem": "^2.21.0"
+  },
+  "bugs": {
+    "url": "https://github.com/akashi-video/akashi-verify/issues"
+  },
+  "author": "Akashi <hello@akashi.video> (https://akashi.video)",
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
